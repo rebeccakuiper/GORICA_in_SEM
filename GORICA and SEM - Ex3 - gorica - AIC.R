@@ -39,7 +39,7 @@ coef(fit3)
 #
 # Formulate the hypothesis of interest
 # Here, using our own labeling
-hypotheses3 <- "
+hypothesis3 <- "
   postnumb~prenumb.boy < postnumb~prenumb.girl
 "
 
@@ -62,11 +62,11 @@ standardizedSolution(fit3_AIC)
 # Unless the data is standardized such that prenumb ~~  prenumb = 1, this equates the unstandardized parameters and not the standardized ones. 
 #
 # Alternatively, an approximated AIC can be used:
-hypotheses3_AIC <- "
+hypothesis3_AIC <- "
   postnumb~prenumb.boy = postnumb~prenumb.girl
 "
 set.seed(100)
-results3_AIC <- gorica(fit3, hypotheses3_AIC, comparison = "complement", standardize = TRUE) # Note: Complement is Unconstrained here which is the default 
+results3_AIC <- gorica(fit3, hypothesis3_AIC, comparison = "complement", standardize = TRUE) # Note: Complement is Unconstrained here which is the default 
 results3_AIC
 #
 #   loglik penalty gorica gorica_weights
@@ -77,9 +77,9 @@ results3_AIC
 # Call gorica
 # Note: We need standardized estimates for a meaningful comparison ('standardize = TRUE').
 #
-# Calculate GORICA values and weights for 'hypotheses3' and its complement ('comparison = "complement"').
+# Calculate GORICA values and weights for 'hypothesis3' and its complement ('comparison = "complement"').
 set.seed(100)
-results3 <- gorica(fit3, hypotheses3, comparison = "complement", standardize = TRUE) 
+results3 <- gorica(fit3, hypothesis3, comparison = "complement", standardize = TRUE) 
 results3
 #
 #   loglik penalty gorica gorica_weights
@@ -96,12 +96,12 @@ results3
 # Influence of seed in PT, but negligible:
 #
 #set.seed(100)
-#gorica(fit3, hypotheses3, comparison = "complement", standardize = TRUE)$fit[,2]
+#gorica(fit3, hypothesis3, comparison = "complement", standardize = TRUE)$fit[,2]
 results3$fit[,2]
 set.seed(101)
-gorica(fit3, hypotheses3, comparison = "complement", standardize = TRUE)$fit[,2]
+gorica(fit3, hypothesis3, comparison = "complement", standardize = TRUE)$fit[,2]
 set.seed(102)
-gorica(fit3, hypotheses3, comparison = "complement", standardize = TRUE)$fit[,2]
+gorica(fit3, hypothesis3, comparison = "complement", standardize = TRUE)$fit[,2]
 #
 # 1.49723 1.50277
 # 1.5005  1.4995
@@ -110,7 +110,7 @@ gorica(fit3, hypotheses3, comparison = "complement", standardize = TRUE)$fit[,2]
 
 #####################################################################################
 
-# The support for 'hypotheses3' is to be expected, when inspecting:
+# The support for 'hypothesis3' is to be expected, when inspecting:
 #lavaan::standardizedsolution(fit3)[c(1,6),]
 ##       lhs op     rhs group est.std    se      z pvalue ci.lower ci.upper
 ##1 postnumb  ~ prenumb     1   0.680 0.044 15.439      0    0.593    0.766
